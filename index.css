@@ -1,0 +1,331 @@
+*{
+  margin: 0;
+}
+body{
+  min-height: 100vh;   /* Make page at least full height */
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+.hero-section-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-section{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10vw;
+}
+
+.profile{
+  background-color: rgb(184, 255, 69);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 8pc;
+  border-bottom: 2px solid rgb(23, 23, 31);
+  width: 80vw;
+  max-width: 400px;
+  padding-top: 20px;
+  height: 300px;
+  padding: 20px;
+}
+
+.profile img{
+   width: 200px;
+   height: 200px;
+   border-radius: 50%;
+   border: 2px solid rgb(0, 81, 255);
+}
+.hero-btn-container{
+  background-color: rgb(0, 81, 255);
+  border-radius: 5px;
+  margin: 20px;
+}
+.hero-btn-container button{
+  margin: 10px;
+  border: 2px solid rgb(184, 255, 69);
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: transparent;
+  font-family: "Inter", sans-serif;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.hero-btn-container button:hover{
+  background-color: #232328;
+}
+.about-brief{
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 60vw;
+  align-items: center;
+}
+.about-brief nav ul{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: rgb(0, 81, 255);
+}
+
+.nav-link.active {
+  color: rgb(0, 81, 255);
+  font-weight: 700;
+  border-bottom: 3px solid rgb(184, 255, 69);
+  padding-bottom: 2px;
+}
+
+
+.about-brief h2{
+  font-size: 1.2rem;
+ color: rgb(47, 38, 38);
+}
+
+.about-brief h1{
+  color: rgb(19, 16, 16);
+  font-size: 1.7rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.about-brief  p{
+  color: rgb(32, 36, 46);
+  
+}
+
+.brief-about-me{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.brief-about-me p{
+  max-width: 500px;
+}
+footer {
+  width: 100%;
+  height: 200px; /* adjust height */
+  background-color: rgb(184, 255, 69);
+  clip-path: ellipse(70% 60% at 50% 100%);
+  
+}
+.project-btn-container{
+  position: relative;
+  margin: 30px 0px;
+}
+.project-btn-container span{
+  position: absolute;
+  top: 90px;
+  right: 45px;
+  
+  color: rgb(0, 81, 255);
+  font-size: 2em;
+  animation: slide 3s infinite ease-in-out;
+  transition: all 0.3s ease;
+}
+.projects-btn{
+  background-color: rgb(184, 255, 69);
+  border: 2px solid rgb(0, 81, 255);
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-family: "Inter", sans-serif;
+  font-size: 1.2rem;
+  margin: 40px auto;
+  margin-bottom: 100px;
+  cursor: pointer;
+}
+
+
+@keyframes slide{
+
+  0%{
+    transform: translateY(0);
+  }
+
+  50%{
+    transform: translateY(-10px);
+  }
+
+  100%{
+    transform: translateY(0);
+  }
+
+}
+
+.project-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust card width */
+  gap: 2rem;
+  padding: 2rem 4rem; /* More space on desktop */
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 1400px; /* Keeps it neat on very large screens */
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-in-out;
+  
+}
+
+/* When projects are visible (triggered by clsx) */
+.project-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-container {
+  background: linear-gradient(145deg, #ffffff, #f3f3f3);
+  border: 2px solid rgba(184, 255, 69, 0.6);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 250px;
+}
+
+/* Hover animation */
+.project-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Project title */
+.project-container h2 {
+  font-size: 1.4rem;
+  color: rgb(0, 81, 255);
+  margin-bottom: 0.5rem;
+}
+
+/* Description */
+.project-container p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+/* Image */
+.project-container img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 0.5rem;
+}
+
+/* View Button */
+.view-btn {
+  background-color: rgb(184, 255, 69);
+  border: 2px solid rgb(0, 81, 255);
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-btn:hover {
+  background-color: rgb(0, 81, 255);
+  color: white;
+}
+
+/* 🌐 Responsive padding tweak */
+@media (max-width: 768px) {
+  .project-section {
+    padding: 1.5rem;
+  }
+}
+
+.contact-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+}
+.contact-section p{
+  max-width: 500px;
+}
+.contact-section div button{
+  background-color: rgb(0, 81, 255);
+  border: 2px solid rgb(184, 255, 69);
+  border-radius: 5px;
+  padding: 10px 20px;
+  color: rgb(228, 220, 220);
+  font-family: "Inter", sans-serif;
+}
+.contacts{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid;
+  padding: 0px 50px;
+  border-image: linear-gradient(90deg, #ff00cc, #3333ff) 1;
+  -webkit-mask:
+    radial-gradient(circle 20px at top left, transparent 20px, black 0),
+    radial-gradient(circle 20px at top right, transparent 20px, black 0),
+    radial-gradient(circle 20px at bottom left, transparent 20px, black 0),
+    radial-gradient(circle 20px at bottom right, transparent 20px, black 0);
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+}
+
+.contacts img{
+  width: 70px;
+  cursor: pointer;
+}
+
+.send-mail-btn{
+  position: relative;
+}
+
+.send-mail-btn span{
+  position: absolute;
+  color: rgb(26, 36, 11);
+  right: 50px;
+  top: 20px;
+  animation: click 4s infinite ease-in-out;
+}
+
+.send-mail-btn button{
+  cursor: pointer;
+}
+
+@keyframes click{
+  0%{
+    transform: translateY(0);
+  }
+
+  50%{
+    transform: translateY(20px);
+  }
+
+  100%{
+    transform: translateY(0);
+  }
+}
