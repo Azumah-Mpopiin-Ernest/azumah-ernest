@@ -6,7 +6,7 @@ import lifeEndGame from "./endgame.png"
 export const projects = [
     {
         img: lifeEndGame,
-        name: : "Life EndGame",
+        name: "Life EndGame",
         description: "Users are giving the chance to save themselves from a lonely world by guessing a hidden word, any wrong guess pay's a penalty.",
         link: "https://life-endgame-jvuv.vercel.app/"
     },
@@ -40,4 +40,5 @@ export const projects = [
     }
 
 ]
+
 
