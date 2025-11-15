@@ -3,7 +3,14 @@ import travelJournalImg from "./travel-journal.png"
 import memeGeneratorImg from  "./meme-generator.png"
 import shopcartImg from "./shopcart.jpg"
 import lifeEndGame from "./endgame.png"
+import easyMarket from "./easy-market.png"
 export const projects = [
+    {
+        img: easyMarket,
+        name: "EasyMarket",
+        description: "EasyMarket is a shopping list app that lets users add, track, and manage items, calculate totals, save or share their basket.",
+        link: "https://easy-market-2q6w.vercel.app/"
+    },
     {
         img: lifeEndGame,
         name: "Life EndGame",
@@ -40,5 +47,6 @@ export const projects = [
     }
 
 ]
+
 
 
