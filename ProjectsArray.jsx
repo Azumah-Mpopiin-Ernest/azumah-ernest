@@ -8,7 +8,7 @@ export const projects = [
     {
         img: easyMarket,
         name: "EasyMarket",
-        description: "EasyMarket is a shopping list app that lets users add, track, and manage items, calculate totals, save or share their basket.",
+        description: "EasyMarket is an offline shopping list app that lets users add, track, and manage items, calculate totals, save or share their basket.",
         link: "https://easy-market-2q6w.vercel.app/"
     },
     {
@@ -47,6 +47,7 @@ export const projects = [
     }
 
 ]
+
 
 
 
