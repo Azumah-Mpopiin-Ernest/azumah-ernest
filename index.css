@@ -201,7 +201,7 @@ transition: all 0.6s ease-in-out;
   justify-content: space-between;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 250px;
+  max-width: 300px;
 }
 
 /* Hover animation */
