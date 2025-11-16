@@ -174,18 +174,24 @@ footer {
 }
 
 .project-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust card width */
-  gap: 2rem;
-  padding: 2rem 4rem; /* More space on desktop */
-  margin-top: 2rem;
-  width: 100%;
-  max-width: 1400px; /* Keeps it neat on very large screens */
-  margin-left: auto;
-  margin-right: auto;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease-in-out;
+ display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+padding: 2rem 4rem;
+margin-top: 2rem;
+width: 100%;
+max-width: 1400px;
+
+margin-left: auto;
+margin-right: auto;
+
+/* Center grid items horizontally */
+justify-content: center;
+
+opacity: 0;
+transform: translateY(20px);
+transition: all 0.6s ease-in-out;
+
   
 }
 
