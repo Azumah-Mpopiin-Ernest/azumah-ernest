@@ -4,7 +4,14 @@ import memeGeneratorImg from  "./meme-generator.png"
 import shopcartImg from "./shopcart.jpg"
 import lifeEndGame from "./endgame.png"
 import easyMarket from "./easy-market.png"
+import libraryManager from "./library-manager.png"
 export const projects = [
+    {
+        img: libraryManager,
+        name: Library Manager,
+        description: "A web-based library management system that allows students to browse books, borrow and share book links, receive alerts, and manage accounts with secure authentication.",
+        link: "https://library-manager-rho-coral.vercel.app/"
+    },
     {
         img: easyMarket,
         name: "EasyMarket",
@@ -47,6 +54,7 @@ export const projects = [
     }
 
 ]
+
 
 
 
