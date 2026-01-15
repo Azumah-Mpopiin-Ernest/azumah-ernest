@@ -8,7 +8,7 @@ import libraryManager from "./library-manager.png"
 export const projects = [
     {
         img: libraryManager,
-        name: Library Manager,
+        name: "Library Manager",
         description: "A web-based library management system that allows students to browse books, borrow and share book links, receive alerts, and manage accounts with secure authentication.",
         link: "https://library-manager-rho-coral.vercel.app/"
     },
@@ -54,6 +54,7 @@ export const projects = [
     }
 
 ]
+
 
 
 
