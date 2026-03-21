@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import profile from "../images/profile.png";
+import profile from "./profile.png";
 
 export default function CrystalProfile() {
   const canvasRef = useRef();
