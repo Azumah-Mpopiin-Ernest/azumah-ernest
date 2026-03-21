@@ -58,7 +58,7 @@ export default function Home() {
           </section>
 
           <div className="max-w-[500px] md:max-w-[800px] px-5">
-            <h2 className="text-yellow-500 font-bold text-xl border-b w-40 mb-2">
+            <h2 className="text-yellow-500 font-bold text-xl border-b w-20 mb-2">
               About
             </h2>
             <p className="text-white">
@@ -144,6 +144,19 @@ export default function Home() {
                 </button>
               </a>
             </div>
+          </div>
+
+          <div id="resume" className="flex flex-col gap-10 mb-20">
+            <h2 className="text-yellow-500 font-bold text-xl text-center mb-2">
+              Resume
+            </h2>
+            <a
+              href="/resume.pdf"
+              className="text-[#0f172a] md:text-lg hover:bg-yellow-600 transition bg-yellow-500 px-10 py-2 rounded-xl"
+              download={"Azumah_Mpopiin_Ernest.pdf"}
+            >
+              Download Resume
+            </a>
           </div>
         </div>
       </main>

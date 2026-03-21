@@ -1,11 +1,11 @@
-import { NavLink } from "react-router";
+
 import { useEffect, useState } from "react";
 
 export default function Header() {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const sectionIds = ["home", "projects", "skills", "contact"];
+    const sectionIds = ["home", "projects", "skills", "contact", "resume"];
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean);
@@ -37,6 +37,7 @@ export default function Header() {
     { name: "Projects", href: "#projects", id: "projects" },
     { name: "Skills", href: "#skills", id: "skills" },
     { name: "Contact", href: "#contact", id: "contact" },
+    { name: "Resume", href: "#resume", id: "resume" },
   ];
 
   return (
@@ -59,17 +60,6 @@ export default function Header() {
         );
       })}
 
-      <NavLink
-        to="/Resume"
-        className={({ isActive }) =>
-          isActive ? "nav-item active" : "nav-item"
-        }
-      >
-        <span className="link-text text-sm md:text-lg">Resume</span>
-        <div className="orbit-container">
-          <div className="glow-particle"></div>
-        </div>
-      </NavLink>
     </nav>
   );
 }

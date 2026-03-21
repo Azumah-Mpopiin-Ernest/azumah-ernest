@@ -4,17 +4,17 @@ const tree = {
     {
       name: "Frontend",
       skills: [
-        { name: "JavaScript", source: "Scrimba — first course, June 2024" },
+        { name: "JavaScript", source: "Scrimba — first course, June 2025" },
         { name: "React", source: "Scrimba — React course" },
-        { name: "HTML & CSS", source: "Scrimba — Web Dev Basics" },
+        { name: "HTML & CSS", source: "KNUST + Personal practice" },
         { name: "Tailwind CSS", source: "YouTube + personal projects" },
       ],
     },
     {
       name: "Backend",
       skills: [
-        { name: "Node.js", source: "Scrimba + YouTube" },
-        { name: "Express", source: "YouTube + building projects" },
+        { name: "Node.js", source: "YouTube + Personal projects" },
+        { name: "Express", source: "YouTube + Personal projects" },
         { name: "PostgreSQL", source: "YouTube + Prisma docs" },
         { name: "Prisma", source: "Official Prisma docs" },
         { name: "OAuth 2.0", source: "YouTube + hands-on projects" },
