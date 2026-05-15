@@ -4,10 +4,16 @@ const tree = {
     {
       name: "Frontend",
       skills: [
-        { name: "JavaScript", source: "Scrimba — first course, June 2025" },
-        { name: "React", source: "Scrimba — React course" },
+        {
+          name: "JavaScript",
+          source: "Scrimba + real world projects",
+        },
+        {
+          name: "React",
+          source: "Scrimba — React course + real world projects",
+        },
         { name: "HTML & CSS", source: "KNUST + Personal practice" },
-        { name: "Tailwind CSS", source: "YouTube + personal projects" },
+        { name: "Tailwind CSS", source: "YouTube + real world projects" },
       ],
     },
     {
@@ -18,6 +24,7 @@ const tree = {
         { name: "PostgreSQL", source: "YouTube + Prisma docs" },
         { name: "Prisma", source: "Official Prisma docs" },
         { name: "OAuth 2.0", source: "YouTube + hands-on projects" },
+        { name: "Firebase", source: "Scrimba + Real world projects" },
       ],
     },
   ],
@@ -25,7 +32,7 @@ const tree = {
 
 function SkillNode({ skill }) {
   return (
-    <div className="relative group flex flex-col items-center">
+    <div className="relative group flex  flex-col items-center">
       <div className="w-0.5 h-6 bg-yellow-500" />{" "}
       {/* ✅ yellow stem per skill */}
       <div className="relative px-3 py-1.5 text-xs font-medium border border-zinc-700 rounded-lg bg-zinc-900 text-zinc-300 cursor-pointer group-hover:border-yellow-500 group-hover:text-yellow-400 transition-all whitespace-nowrap">
@@ -46,7 +53,7 @@ function SkillNode({ skill }) {
 
 function Branch({ branch }) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center ">
       {/* Stem down to branch node */}
       <div className="w-0.5 h-8 bg-yellow-500" />
 
@@ -70,7 +77,7 @@ function Branch({ branch }) {
         />
 
         {/* Skills */}
-        <div className="flex flex-wrap md:flex-nowrap justify-center gap-4 w-full">
+        <div className="flex flex-wrap md:flex-nowrap z-100 justify-center gap-4 w-full">
           {branch.skills.map((skill) => (
             <SkillNode key={skill.name} skill={skill} />
           ))}
@@ -105,7 +112,7 @@ export default function SkillTree() {
         {tree.branches.map((branch) => (
           <div
             key={branch.name}
-            className="flex-1 w-full flex flex-col items-center px-4 md:px-8"
+            className="flex-1 w-full flex flex-col items-center px-4 md:px-8 md:pl-60 overflow-x-auto [scrollbar-width:none]"
           >
             <Branch branch={branch} />
           </div>

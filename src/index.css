@@ -68,9 +68,18 @@ body {
   width: 100%;
   overflow: hidden;
   position: relative;
+  cursor: grab;
 }
 
-/* TRACK THAT MOVES */
+.projects-wrapper.is-hovering {
+  overflow-x: auto;
+  cursor: grab;
+  scrollbar-width: none;
+}
+
+.projects-wrapper.is-hovering::-webkit-scrollbar {
+  display: none;
+}
 
 .projects-track {
   display: flex;
@@ -79,9 +88,7 @@ body {
   animation: scrollProjects 35s linear infinite;
 }
 
-/* PAUSE ON HOVER */
-
-.projects-wrapper:hover .projects-track {
+.projects-wrapper.is-hovering .projects-track {
   animation-play-state: paused;
 }
 

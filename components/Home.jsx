@@ -1,5 +1,5 @@
 import Header from "./Header";
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { projects } from "./projects";
 import CrystalProfile from "./crystalFrame";
 import SkillTree from "./skillTree";
@@ -16,7 +16,7 @@ export default function Home() {
   const [text, setText] = useState("");
   const [lineIndex, setLineIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
-
+  const scrollRef = useRef(null);
   useEffect(() => {
     const currentLine = lines[lineIndex];
 
@@ -37,6 +37,62 @@ export default function Home() {
 
     return () => clearTimeout(nextTimeout);
   }, [charIndex, lineIndex]);
+
+  useEffect(() => {
+    const wrapper = scrollRef.current;
+    if (!wrapper) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    const onMouseEnter = () => {
+      wrapper.classList.add("is-hovering");
+      // Sync scroll position to where the animation visually was
+      const track = wrapper.querySelector(".projects-track");
+      const trackWidth = track.scrollWidth / 2; // duplicated, so half
+      wrapper.scrollLeft = wrapper.scrollLeft % trackWidth;
+    };
+
+    const onMouseLeave = () => {
+      wrapper.classList.remove("is-hovering");
+      isDown = false;
+    };
+
+    const onMouseDown = (e) => {
+      isDown = true;
+      startX = e.pageX - wrapper.offsetLeft;
+      scrollLeft = wrapper.scrollLeft;
+      wrapper.style.cursor = "grabbing";
+    };
+
+    const onMouseUp = () => {
+      isDown = false;
+      wrapper.style.cursor = "grab";
+    };
+
+    const onMouseMove = (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - wrapper.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      wrapper.scrollLeft = scrollLeft - walk;
+    };
+
+    wrapper.addEventListener("mouseenter", onMouseEnter);
+    wrapper.addEventListener("mouseleave", onMouseLeave);
+    wrapper.addEventListener("mousedown", onMouseDown);
+    wrapper.addEventListener("mouseup", onMouseUp);
+    wrapper.addEventListener("mousemove", onMouseMove);
+
+    return () => {
+      wrapper.removeEventListener("mouseenter", onMouseEnter);
+      wrapper.removeEventListener("mouseleave", onMouseLeave);
+      wrapper.removeEventListener("mousedown", onMouseDown);
+      wrapper.removeEventListener("mouseup", onMouseUp);
+      wrapper.removeEventListener("mousemove", onMouseMove);
+    };
+  }, []);
 
   return (
     <>
@@ -75,16 +131,17 @@ export default function Home() {
           </div>
 
           {/* PROJECT SCROLLER */}
-          <div id="projects" className="projects-wrapper mb-10">
-            <h2 className="text-yellow-500 font-bold text-xl text-center mb-5">
-              Featured Projects
-            </h2>
+          <h2 className="text-yellow-500 font-bold text-xl text-center mb-5">
+            Featured Projects
+          </h2>
+          <div
+            id="projects"
+            className="projects-wrapper mb-10 py-10"
+            ref={scrollRef}
+          >
             <div className="projects-track ">
               {[...projects, ...projects].map((project, i) => (
-                <div
-                  key={i}
-                  className="project-card max-w-[200px] max-w-[200px]"
-                >
+                <div key={i} className="project-card max-w-[200px]">
                   {project.img && (
                     <img
                       src={project.img}

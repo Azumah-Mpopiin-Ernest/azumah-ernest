@@ -1,5 +1,11 @@
 export const projects = [
   {
+    name: "PHIX HFCH",
+    description:
+      "Maintenance management application for Holy Family Catholic Hospital Berekum. The system is designed to streamline the reporting, prioritization, assignment, and resolution of maintenance issues within the hospital environment.",
+    link: "https://phix-hfch.vercel.app/",
+  },
+  {
     name: "Library Manager",
     description:
       "A web-based library management system that allows students to browse books, borrow and share book links, receive alerts, and manage accounts with secure authentication.",
