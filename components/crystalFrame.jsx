@@ -7,7 +7,11 @@ export default function CrystalProfile() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    const W = 260, H = 260, CX = W / 2, CY = H / 2, R = 128;
+    const W = 260,
+      H = 260,
+      CX = W / 2,
+      CY = H / 2,
+      R = 128;
 
     const palette = [
       ["#7f77dd", "#afa9ec", "#3c3489"],
@@ -22,12 +26,17 @@ export default function CrystalProfile() {
       const angle = Math.random() * Math.PI * 2;
       const dist = 20 + Math.random() * 90;
       return {
-        x: CX, y: CY, size: 6 + Math.random() * 18,
+        x: CX,
+        y: CY,
+        size: 6 + Math.random() * 18,
         rotation: Math.random() * Math.PI * 2,
         rotSpeed: (Math.random() - 0.5) * 0.012,
-        driftAngle: angle, driftSpeed: 0.002 + Math.random() * 0.004,
-        driftDist: dist, driftPhase: Math.random() * Math.PI * 2,
-        col, alpha: 0.5 + Math.random() * 0.5,
+        driftAngle: angle,
+        driftSpeed: 0.002 + Math.random() * 0.004,
+        driftDist: dist,
+        driftPhase: Math.random() * Math.PI * 2,
+        col,
+        alpha: 0.5 + Math.random() * 0.5,
         sides: Math.random() > 0.5 ? 6 : 4,
         pulse: Math.random() * Math.PI * 2,
         pulseSpeed: 0.02 + Math.random() * 0.03,
@@ -60,8 +69,14 @@ export default function CrystalProfile() {
 
       for (const c of crystals) {
         const wave = Math.sin(t * c.driftSpeed + c.driftPhase) * 8;
-        c.x = CX + Math.cos(c.driftAngle + t * c.driftSpeed * 0.4) * (c.driftDist + wave);
-        c.y = CY + Math.sin(c.driftAngle + t * c.driftSpeed * 0.4) * (c.driftDist + wave);
+        c.x =
+          CX +
+          Math.cos(c.driftAngle + t * c.driftSpeed * 0.4) *
+            (c.driftDist + wave);
+        c.y =
+          CY +
+          Math.sin(c.driftAngle + t * c.driftSpeed * 0.4) *
+            (c.driftDist + wave);
 
         // glow
         const g = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.size * 2.5);
@@ -82,8 +97,9 @@ export default function CrystalProfile() {
         ctx.beginPath();
         for (let i = 0; i < c.sides; i++) {
           const a = (i / c.sides) * Math.PI * 2 - Math.PI / 2;
-          i === 0 ? ctx.moveTo(Math.cos(a) * sz, Math.sin(a) * sz)
-                  : ctx.lineTo(Math.cos(a) * sz, Math.sin(a) * sz);
+          i === 0
+            ? ctx.moveTo(Math.cos(a) * sz, Math.sin(a) * sz)
+            : ctx.lineTo(Math.cos(a) * sz, Math.sin(a) * sz);
         }
         ctx.closePath();
         const grad = ctx.createRadialGradient(0, -sz * 0.3, 0, 0, 0, sz);
@@ -106,7 +122,6 @@ export default function CrystalProfile() {
 
   return (
     <div className="relative w-[260px] h-[260px] flex items-center justify-center mt-10">
-        
       {/* Crystal canvas bg */}
       <canvas
         ref={canvasRef}
@@ -115,14 +130,19 @@ export default function CrystalProfile() {
         className="absolute inset-0 rounded-full"
       />
       {/* Spinning gradient ring */}
-      <div className="absolute inset-[-4px] rounded-full z-[2]"
-        style={{ background: "conic-gradient(#7f77dd,#5dcaa5,#378add,#d4537e,#ef9f27,#7f77dd)", animation: "spin 4s linear infinite" }}
+      <div
+        className="absolute inset-[-4px] rounded-full z-[2]"
+        style={{
+          background:
+            "conic-gradient(#7f77dd,#5dcaa5,#378add,#d4537e,#ef9f27,#7f77dd)",
+          animation: "spin 4s linear infinite",
+        }}
       />
       <div className="absolute inset-[4px] rounded-full bg-[#06061a] z-[3]" />
       <div className="absolute flex justify-between text-[[#06061a]] w-full z-[4] bg-white px-4 rounded whitespace-nowrap">
-            <span>Full stack</span>
-            <span>Developer</span>
-        </div>
+        <span>Full stack</span>
+        <span>Developer</span>
+      </div>
       {/* Profile image */}
       <img
         src={profile}
