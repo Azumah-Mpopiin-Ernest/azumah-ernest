@@ -1,15 +1,28 @@
 @import "tailwindcss";
 
+/* ── BASE ───────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #1c2230;
-  width: auto;
   overflow-x: hidden;
 }
+
+div,
+main {
+  scroll-margin-top: 100px;
+}
+
+/* ── NAVBAR ─────────────────────────────────────────────── */
+
 .navbar {
   display: flex;
   gap: 2rem;
   padding: 1rem;
-  background: #0f172a; /* Dark background makes glow pop */
+  background: #0f172a;
 }
 
 .nav-item {
@@ -23,9 +36,8 @@ body {
   color: #fff;
 }
 
-/* The container that rotates */
 .orbit-container {
-  display: none; /* Hidden by default */
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -39,10 +51,9 @@ body {
   animation: orbit 3s linear infinite;
 }
 
-/* The actual glowing dot */
 .glow-particle {
   position: absolute;
-  top: -4px; /* Adjust based on your padding */
+  top: -4px;
   left: 50%;
   width: 6px;
   height: 6px;
@@ -62,66 +73,84 @@ body {
   }
 }
 
-/* SCROLLER CONTAINER */
+/* ── PROJECT SCROLLER ───────────────────────────────────── */
 
 .projects-wrapper {
   width: 100%;
   overflow: hidden;
   position: relative;
-  cursor: grab;
-}
-
-.projects-wrapper.is-hovering {
-  overflow-x: auto;
-  cursor: grab;
-  scrollbar-width: none;
-}
-
-.projects-wrapper.is-hovering::-webkit-scrollbar {
-  display: none;
+  padding: 40px 0;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
 }
 
 .projects-track {
   display: flex;
-  gap: 28px;
   width: max-content;
   animation: scrollProjects 35s linear infinite;
+  will-change: transform;
 }
 
-.projects-wrapper.is-hovering .projects-track {
+/* Pause when hovering anywhere over the track */
+.projects-wrapper:hover .projects-track {
   animation-play-state: paused;
 }
 
-/* CARD */
+@keyframes scrollProjects {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ── PROJECT CARD ───────────────────────────────────────── */
 
 .project-card {
+  width: 200px;
+  flex-shrink: 0;
+  margin-right: 28px;
   padding: 22px;
   border-radius: 16px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  gap: 10px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.25);
-
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-
-  transition: all 0.35s ease;
+  transition:
+    box-shadow 0.35s ease,
+    translate 0.35s ease;
 }
 
-/* IMAGE */
+.project-card:hover {
+  translate: 0 -8px;
+  box-shadow:
+    0 0 20px rgba(56, 189, 248, 0.45),
+    0 0 50px rgba(56, 189, 248, 0.25);
+}
 
 .project-img {
   width: 100%;
   height: 140px;
   object-fit: cover;
   border-radius: 10px;
-  margin-bottom: 12px;
 }
-
-/* TEXT */
 
 .project-card h2 {
   font-size: 18px;
@@ -133,40 +162,17 @@ body {
   font-size: 13px;
   color: #e4e4e4;
   line-height: 1.4;
+  flex-grow: 1;
 }
 
 .project-card a {
   color: #38bdf8;
   font-weight: 600;
+  font-size: 13px;
   text-decoration: none;
 }
 
-/* HOVER EFFECT */
-
-.project-card:hover {
-  transform: translateY(-8px) scale(1.03);
-
-  box-shadow:
-    0 0 20px rgba(56, 189, 248, 0.45),
-    0 0 50px rgba(56, 189, 248, 0.25);
-}
-
-/* INFINITE SCROLL */
-
-@keyframes scrollProjects {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* ── TYPEWRITER ─────────────────────────────────────────── */
 
 .typewriter-wrap {
   display: flex;
@@ -174,43 +180,24 @@ body {
   margin-top: -10px;
 }
 
-.typewriter-text {
-  width: 22ch;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid rgba(255, 255, 255, 0.9);
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  animation:
-    typing 3.2s steps(22, end),
-    blinkCursor 0.8s step-end infinite;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 22ch;
-  }
-}
-
 @keyframes blinkCursor {
   0%,
   100% {
-    border-color: rgba(255, 255, 255, 0.95);
+    opacity: 1;
   }
   50% {
-    border-color: transparent;
+    opacity: 0;
   }
 }
 
-html {
-  scroll-behavior: smooth;
+.cursor {
+  animation: blinkCursor 0.8s step-end infinite;
 }
 
-div,
-main {
-  scroll-margin-top: 100px;
+/* ── MISC ───────────────────────────────────────────────── */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
