@@ -4,17 +4,17 @@ const tree = {
     {
       name: "Frontend",
       skills: [
-        { name: "JavaScript", source: "Scrimba — first course, June 2025" },
+        { name: "JavaScript", source: "Scrimba — June 2025" },
         { name: "React", source: "Scrimba — React course" },
-        { name: "HTML & CSS", source: "KNUST + Personal practice" },
+        { name: "HTML & CSS", source: "KNUST + personal practice" },
         { name: "Tailwind CSS", source: "YouTube + personal projects" },
       ],
     },
     {
       name: "Backend",
       skills: [
-        { name: "Node.js", source: "YouTube + Personal projects" },
-        { name: "Express", source: "YouTube + Personal projects" },
+        { name: "Node.js", source: "YouTube + personal projects" },
+        { name: "Express", source: "YouTube + personal projects" },
         { name: "PostgreSQL", source: "YouTube + Prisma docs" },
         { name: "Prisma", source: "Official Prisma docs" },
         { name: "OAuth 2.0", source: "YouTube + hands-on projects" },
@@ -26,18 +26,17 @@ const tree = {
 function SkillNode({ skill }) {
   return (
     <div className="relative group flex flex-col items-center">
-      <div className="w-0.5 h-6 bg-yellow-500" />{" "}
-      {/* ✅ yellow stem per skill */}
-      <div className="relative px-3 py-1.5 text-xs font-medium border border-zinc-700 rounded-lg bg-zinc-900 text-zinc-300 cursor-pointer group-hover:border-yellow-500 group-hover:text-yellow-400 transition-all whitespace-nowrap">
+      <div className="w-px h-6 bg-[#232838] group-hover:bg-[#4fd8c4] transition-colors" />
+      <div className="relative px-3 py-1.5 font-mono text-xs border border-[#232838] rounded-md bg-[#10141f] text-[#c4c9d6] cursor-default group-hover:border-[#4fd8c4] group-hover:text-[#4fd8c4] transition-colors whitespace-nowrap">
         {skill.name}
-        <div className="hidden group-hover:block absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-44 bg-zinc-950 border border-yellow-500 rounded-lg p-2 z-10 pointer-events-none">
-          <p className="text-yellow-400 text-xs font-medium mb-1">
+        <div className="hidden group-hover:block absolute bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-48 bg-[#0a0e17] border border-[#4fd8c4]/40 rounded-lg p-3 z-10 pointer-events-none shadow-[0_10px_30px_-10px_rgba(0,0,0,0.7)]">
+          <p className="text-[#4fd8c4] text-[11px] font-semibold mb-1">
             {skill.name}
           </p>
-          <p className="text-zinc-400 text-xs leading-relaxed">
+          <p className="text-[#8992a9] text-[11px] leading-relaxed font-mono">
             {skill.source}
           </p>
-          <div className="absolute top-full left-1/2 -translate-x-1/2 border-[6px] border-transparent border-t-yellow-500" />
+          <div className="absolute top-full left-1/2 -translate-x-1/2 border-[6px] border-transparent border-t-[#4fd8c4]/40" />
         </div>
       </div>
     </div>
@@ -47,29 +46,19 @@ function SkillNode({ skill }) {
 function Branch({ branch }) {
   return (
     <div className="flex flex-col items-center">
-      {/* Stem down to branch node */}
-      <div className="w-0.5 h-8 bg-yellow-500" />
-
-      {/* Branch label */}
-      <div className="px-5 py-2 bg-zinc-900 border-2 border-yellow-500 rounded-lg text-yellow-400 font-semibold text-sm whitespace-nowrap">
+      <div className="w-px h-8 bg-[#232838]" />
+      <div className="px-5 py-2 bg-[#10141f] border border-[#232838] rounded-lg text-[#e9ecf3] font-display font-semibold text-sm whitespace-nowrap">
         {branch.name}
       </div>
-
-      {/* Stem down to horizontal bar */}
-      <div className="w-0.5 h-8 bg-yellow-500" />
-
-      {/* ✅ Horizontal yellow bar connecting all skill stems */}
+      <div className="w-px h-8 bg-[#232838]" />
       <div className="relative flex items-start justify-center w-full">
-        {/* The yellow horizontal line stretches across all skill stems */}
         <div
-          className="absolute top-0 left-[calc(50%/var(--count))] right-[calc(50%/var(--count))] h-0.5 bg-yellow-500"
+          className="absolute top-0 h-px bg-[#232838]"
           style={{
             left: `calc(100% / ${branch.skills.length * 2})`,
             right: `calc(100% / ${branch.skills.length * 2})`,
           }}
         />
-
-        {/* Skills */}
         <div className="flex flex-wrap md:flex-nowrap justify-center gap-4 w-full">
           {branch.skills.map((skill) => (
             <SkillNode key={skill.name} skill={skill} />
@@ -83,25 +72,21 @@ function Branch({ branch }) {
 export default function SkillTree() {
   return (
     <section className="w-full flex flex-col items-center py-16 px-4">
-      <h2 className="text-yellow-500 font-bold text-xl mb-10">
+      <p className="font-mono text-[11px] tracking-[0.2em] text-[#4fd8c4] mb-2">
+        SEC.03 — STACK
+      </p>
+      <h2 className="font-display font-semibold text-2xl mb-10 text-[#e9ecf3]">
         Skills & Learning
       </h2>
 
-      {/* Root node */}
-      <div className="px-7 py-2.5 bg-zinc-900 border-2 border-yellow-500 rounded-xl text-yellow-400 font-bold text-base whitespace-nowrap">
+      <div className="px-7 py-2.5 bg-[#10141f] border border-[#4fd8c4]/50 rounded-xl text-[#4fd8c4] font-display font-bold text-base whitespace-nowrap shadow-[0_0_30px_-10px_#4fd8c455]">
         {tree.root}
       </div>
 
-      {/* Root stem */}
-      <div className="w-0.5 h-8 bg-yellow-500" />
+      <div className="w-px h-8 bg-[#232838]" />
 
-      {/* ✅ Desktop: horizontal bar connecting Frontend and Backend */}
-      <div className="relative flex flex-col md:flex-row items-center md:items-start w-full max-w-3xl">
-        <div className="hidden md:block absolute top-0 left-1/4 right-1/4 w-[520px] h-0.5 bg-yellow-500" />
-
-        {/* ✅ Left divider between branches — visible on desktop only */}
-        <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-0.5 bg-zinc-800" />
-
+      <div className="relative flex flex-col md:flex-row items-start w-full max-w-3xl">
+        <div className="hidden md:block absolute top-0 left-1/2 w-px h-full bg-[#161b29]" />
         {tree.branches.map((branch) => (
           <div
             key={branch.name}

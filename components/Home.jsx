@@ -1,16 +1,17 @@
 import Header from "./Header";
 import { useState, useEffect } from "react";
-import { projects } from "./projects";
+
 import CrystalProfile from "./crystalFrame";
 import SkillTree from "./skillTree";
 import Footer from "./footer";
+import Projects from "./projectsSection";
+
 export default function Home() {
   const lines = [
-    "You are Warmly Welcome",
-    "You are in the right place",
-    "I build clean web experiences",
-
-    "Thanks for passing by",
+    "Building signal from noise.",
+    "Telecommunications Engineering @ KNUST.",
+    "Self-taught full-stack developer.",
+    "Open to new frequencies — let's talk.",
   ];
 
   const [text, setText] = useState("");
@@ -19,22 +20,18 @@ export default function Home() {
 
   useEffect(() => {
     const currentLine = lines[lineIndex];
-
     if (charIndex < currentLine.length) {
       const timeout = setTimeout(() => {
         setText(currentLine.slice(0, charIndex + 1));
-        setCharIndex((prev) => prev + 1);
-      }, 70);
-
+        setCharIndex((p) => p + 1);
+      }, 55);
       return () => clearTimeout(timeout);
     }
-
     const nextTimeout = setTimeout(() => {
       setCharIndex(0);
       setText("");
-      setLineIndex((prev) => (prev + 1) % lines.length);
-    }, 1500);
-
+      setLineIndex((p) => (p + 1) % lines.length);
+    }, 1600);
     return () => clearTimeout(nextTimeout);
   }, [charIndex, lineIndex]);
 
@@ -42,122 +39,107 @@ export default function Home() {
     <>
       <Header />
 
-      <main className="w-full flex justify-center mt-16">
-        <div className="flex flex-col items-center gap-16 md:max-w-[1100px]  w-full overflow-x-hidden">
-          <section id="home">
+      <main className="w-full flex justify-center bg-[#0a0e17] text-[#e9ecf3]">
+        <div className="flex flex-col items-center gap-24 md:max-w-[1100px] w-full overflow-x-hidden pt-32 pb-10">
+          {/* HERO */}
+          <section
+            id="home"
+            className="flex flex-col items-center text-center px-5"
+          >
             <CrystalProfile />
-            <h1 className="text-white font-bold text-xl my-10">
+            <h1 className="font-display font-bold text-2xl md:text-3xl mt-8 mb-3">
               Azumah Mpopiin Ernest
             </h1>
-            <div className="typewriter-wrap w-full">
-              <h1 className="typewriter-live text-yellow-500 md:text-lg">
+            <div className="h-6 flex items-center">
+              <p className="font-mono text-sm md:text-base text-[#4fd8c4]">
                 {text}
                 <span className="cursor">|</span>
-              </h1>
+              </p>
             </div>
           </section>
 
-          <div className="max-w-[500px] md:max-w-[800px] px-5">
-            <h2 className="text-yellow-500 font-bold text-xl border-b w-20 mb-2">
-              About
-            </h2>
-            <p className="text-white">
-              Hi, I'm Azumah Mpopiin Ernest, a Telecommunication Engineering
-              student at KNUST, Kumasi, and a self-taught full stack developer.
-              Beyond the code, I bring strong people skills and a natural ease
-              in team environments, something I've deliberately developed
-              through reading, practice, and personal reflection. The value I
-              lead with in everything I do is love: for the craft, for the
-              people I work with, and for building things that actually matter.
-              I'm always open to new knowledge, collaboration, and opportunities
-              to grow.
+          {/* ABOUT */}
+          <section className="max-w-[560px] md:max-w-[800px] px-5 text-center">
+            <p className="font-mono text-[11px] tracking-[0.2em] text-[#4fd8c4] mb-2">
+              SEC.01 — ABOUT
             </p>
-          </div>
-
-          {/* PROJECT SCROLLER */}
-          <div id="projects" className="projects-wrapper mb-10">
-            <h2 className="text-yellow-500 font-bold text-xl text-center mb-5">
-              Featured Projects
+            <h2 className="font-display font-semibold text-xl mb-4">
+              A little about me
             </h2>
-            <div className="projects-track ">
-              {[...projects, ...projects].map((project, i) => (
-                <div
-                  key={i}
-                  className="project-card max-w-[200px] max-w-[200px]"
-                >
-                  {project.img && (
-                    <img
-                      src={project.img}
-                      alt={project.name}
-                      className="project-img"
-                    />
-                  )}
+            <p className="text-[#c4c9d6] leading-relaxed">
+              I'm a Telecommunication Engineering student at KNUST, Kumasi, and
+              a self-taught full-stack developer. Outside the code, I bring
+              strong people skills and an ease in team settings that I've built
+              deliberately, through reading, practice, and reflection. I lead
+              with love in everything I do: for the craft, for the people I
+              build with, and for work that actually matters. I'm always open to
+              new knowledge, collaboration, and opportunities to grow.
+            </p>
+          </section>
 
-                  <h2>{project.name}</h2>
+          {/* PROJECTS */}
+          <Projects />
 
-                  <p>{project.description}</p>
-
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Project →
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div id="skills">
+          {/* SKILLS */}
+          <div id="skills" className="w-full">
             <SkillTree />
           </div>
 
-          <div id="contact" className="max-w-[600px] md:max-w-[1100px] px-2">
-            <h2 className="text-yellow-500 font-bold text-xl text-center mb-2">
-              Contacts
+          {/* CONTACT */}
+          <section
+            id="contact"
+            className="max-w-[600px] md:max-w-[1100px] px-5 w-full text-center"
+          >
+            <p className="font-mono text-[11px] tracking-[0.2em] text-[#4fd8c4] mb-2">
+              SEC.04 — CONTACT
+            </p>
+            <h2 className="font-display font-semibold text-xl mb-8">
+              Get in touch
             </h2>
-            <div className="flex justify-center flex-wrap  mb-10 gap-10  p-5">
-              <a href="https://wa.me/233557410587" target="blank">
-                <button className="text-black shadow-white hover:shadow text-lg transition bg-white rounded-xl  p-5 cursor-pointer border border-yellow-200">
-                  WhatsApp
-                </button>
-              </a>
-              <a href="mailto:teslajunior0552@gmail.com" target="blank">
-                <button className="text-black shadow-white hover:shadow text-lg transition bg-white rounded-xl  p-5 cursor-pointer border border-yellow-200">
-                  E-mail
-                </button>
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/ernest-azumah-48b3a5308/"
-                target="blank"
-              >
-                <button className="text-black shadow-white hover:shadow text-lg transition bg-white rounded-xl  p-5 cursor-pointer border border-yellow-200">
-                  Linkedin
-                </button>
-              </a>
-
-              <a href="https://github.com/Azumah-Mpopiin-Ernest" target="blank">
-                <button className="text-black shadow-white hover:shadow text-lg transition bg-white rounded-xl  p-5 cursor-pointer border border-yellow-200">
-                  Github
-                </button>
-              </a>
+            <div className="flex justify-center flex-wrap gap-3">
+              {[
+                { label: "WhatsApp", href: "https://wa.me/233557410587" },
+                { label: "E-mail", href: "mailto:teslajunior0552@gmail.com" },
+                {
+                  label: "LinkedIn",
+                  href: "https://www.linkedin.com/in/ernest-azumah-48b3a5308/",
+                },
+                {
+                  label: "GitHub",
+                  href: "https://github.com/Azumah-Mpopiin-Ernest",
+                },
+              ].map((c) => (
+                <a
+                  key={c.label}
+                  href={c.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="font-mono text-sm text-[#e9ecf3] bg-[#10141f] border border-[#232838] hover:border-[#4fd8c4] hover:text-[#4fd8c4] transition-colors rounded-xl px-6 py-3">
+                    {c.label}
+                  </button>
+                </a>
+              ))}
             </div>
-          </div>
+          </section>
 
-          <div id="resume" className="flex flex-col gap-10 mb-20">
-            <h2 className="text-yellow-500 font-bold text-xl text-center mb-2">
-              Resume
-            </h2>
+          {/* RESUME */}
+          <section
+            id="resume"
+            className="flex flex-col items-center gap-6 mb-10 px-5"
+          >
+            <p className="font-mono text-[11px] tracking-[0.2em] text-[#4fd8c4]">
+              SEC.05 — RESUME
+            </p>
+
             <a
               href="/resume.pdf"
-              className="text-[#0f172a] md:text-lg hover:bg-yellow-600 transition bg-yellow-500 px-10 py-2 rounded-xl"
-              download={"Azumah_Mpopiin_Ernest.pdf"}
+              download="Azumah_Mpopiin_Ernest.pdf"
+              className="font-display font-semibold text-[#0a0e17] bg-[#e8963d] hover:bg-[#f2a850] transition-colors px-10 py-3 rounded-xl"
             >
               Download Resume
             </a>
-          </div>
+          </section>
         </div>
       </main>
 
