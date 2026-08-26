@@ -72,7 +72,7 @@ export default function CrystalProfile() {
         />
       </div>
       <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 z-[4] font-mono text-[10px] tracking-widest text-[#8992a9] bg-[#0a0e17] border border-[#232838] px-3 py-1 rounded-full whitespace-nowrap">
-        ON AIR <span className="text-[#4fd8c4]">●</span>
+        Full Stack Dev <span className="text-[#4fd8c4]">●</span>
       </div>
     </div>
   );

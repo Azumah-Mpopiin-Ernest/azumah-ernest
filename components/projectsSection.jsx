@@ -131,7 +131,7 @@ export default function Projects() {
       </div>
 
       {featured.length > 0 && (
-          <div className="flex justify-center w-full max-w-[1000px] mb-6">
+        <div className="flex justify-center w-full max-w-[1000px] mb-6">
           {featured.map((project) => (
             <FeaturedCard key={project.name} project={project} />
           ))}

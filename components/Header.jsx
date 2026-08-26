@@ -41,14 +41,17 @@ export default function Header() {
   }, []);
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1 bg-[#10141f]/90 backdrop-blur border border-[#232838] rounded-full px-2 py-2 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.6)]">
+    <nav
+      aria-label="Primary navigation"
+      className="fixed top-3 left-1/2 -translate-x-1/2 z-10 flex w-[calc(100vw-1.5rem)] max-w-max items-center gap-1 overflow-x-auto overscroll-x-contain bg-[#10141f]/90 backdrop-blur border border-[#232838] rounded-full px-1.5 py-1.5 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.6)] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:top-4 sm:w-auto sm:px-2 sm:py-2"
+    >
       {sectionLinks.map((link) => {
         const isActive = activeSection === link.id;
         return (
           <a
             key={link.id}
             href={link.href}
-            className={`relative px-4 py-1.5 rounded-full text-xs md:text-sm font-mono tracking-wide transition-colors duration-300 ${
+            className={`relative shrink-0 whitespace-nowrap px-3 py-1.5 rounded-full text-[11px] sm:px-4 sm:text-xs md:text-sm font-mono tracking-wide transition-colors duration-300 ${
               isActive
                 ? "text-[#0a0e17]"
                 : "text-[#8992a9] hover:text-[#e9ecf3]"
