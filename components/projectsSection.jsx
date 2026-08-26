@@ -1,4 +1,5 @@
 import { projects } from "./projects";
+import { Link } from "react-router";
 
 function PriorityTag() {
   return (
@@ -15,64 +16,98 @@ function PriorityTag() {
   );
 }
 
+function ProjectEvidence({ project }) {
+  return (
+    <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-[#232838]">
+      <div className="flex flex-wrap gap-1.5">
+        {project.technologies.map((technology) => (
+          <span
+            key={technology}
+            className="font-mono text-[10px] text-[#4fd8c4] border border-[#4fd8c4]/30 rounded-md px-2 py-1"
+          >
+            {technology}
+          </span>
+        ))}
+      </div>
+      <p className="text-xs text-[#8992a9]">
+        <span className="text-[#c4c9d6]">Role:</span> {project.role}
+      </p>
+      <p className="text-xs text-[#8992a9] leading-relaxed">
+        <span className="text-[#c4c9d6]">Challenge:</span> {project.challenge}
+      </p>
+      <p className="text-xs text-[#8992a9]">
+        <span className="text-[#c4c9d6]">Outcome:</span> {project.outcome}
+      </p>
+      <p className="font-mono text-[10px] uppercase tracking-wide text-[#e8963d]">
+        {project.status}
+      </p>
+    </div>
+  );
+}
+
 function FeaturedCard({ project }) {
   return (
-    <a
-      href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative flex flex-col bg-[#10141f] border border-[#4fd8c4]/40 rounded-2xl overflow-hidden hover:border-[#4fd8c4] transition-colors shadow-[0_0_40px_-20px_#4fd8c455]"
-    >
-      <PriorityTag />
-      {project.img && (
-        <img
-          src={project.img}
-          alt={project.name}
-          className="w-full h-[200px] object-cover"
-        />
-      )}
-      <div className="flex flex-col gap-2 p-6">
-        <h3 className="font-display font-semibold text-lg text-[#e9ecf3]">
-          {project.name}
-        </h3>
-        <p className="text-[#8992a9] text-sm leading-relaxed">
-          {project.description}
-        </p>
-        <span className="font-mono text-xs text-[#4fd8c4] mt-2 group-hover:underline">
-          View project →
-        </span>
+    <div className="group relative flex w-full max-w-[680px] flex-col bg-[#10141f] border border-[#4fd8c4]/40 rounded-2xl overflow-hidden hover:border-[#4fd8c4] transition-colors shadow-[0_0_40px_-20px_#4fd8c455]">
+      <Link to={`/projects/${project.slug}`} className="flex flex-col">
+        <PriorityTag />
+        {project.img && (
+          <img
+            src={project.img}
+            alt={project.name}
+            className="w-full h-[200px] object-cover"
+          />
+        )}
+        <div className="flex flex-col gap-2 p-6 pb-3">
+          <h3 className="font-display font-semibold text-lg text-[#e9ecf3]">
+            {project.name}
+          </h3>
+          <p className="text-[#8992a9] text-sm leading-relaxed">
+            {project.description}
+          </p>
+          <span className="font-mono text-xs text-[#4fd8c4] mt-2 group-hover:underline">
+            View project →
+          </span>
+        </div>
+      </Link>
+      <div className="px-6 pb-6">
+        <ProjectEvidence project={project} />
       </div>
-    </a>
+    </div>
   );
 }
 
 function StandardCard({ project }) {
   return (
-    <a
-      href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex flex-col bg-[#0a0e17] border border-[#232838] rounded-xl overflow-hidden hover:border-[#333b52] transition-colors"
-    >
-      {project.img && (
-        <img
-          src={project.img}
-          alt={project.name}
-          className="w-full h-[120px] object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-        />
-      )}
-      <div className="flex flex-col gap-1.5 p-4">
-        <h3 className="font-display font-medium text-sm text-[#e9ecf3]">
-          {project.name}
-        </h3>
-        <p className="text-[#8992a9] text-xs leading-relaxed line-clamp-2">
-          {project.description}
-        </p>
-        <span className="font-mono text-[11px] text-[#6b7488] mt-1 group-hover:text-[#4fd8c4] transition-colors">
-          View project →
-        </span>
+    <div className="group flex flex-col bg-[#0a0e17] border border-[#232838] rounded-xl overflow-hidden hover:border-[#333b52] transition-colors">
+      <a
+        href={project.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex flex-col"
+      >
+        {project.img && (
+          <img
+            src={project.img}
+            alt={project.name}
+            className="w-full h-[120px] object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+          />
+        )}
+        <div className="flex flex-col gap-1.5 p-4 pb-1">
+          <h3 className="font-display font-medium text-sm text-[#e9ecf3]">
+            {project.name}
+          </h3>
+          <p className="text-[#8992a9] text-xs leading-relaxed line-clamp-2">
+            {project.description}
+          </p>
+          <span className="font-mono text-[11px] text-[#6b7488] mt-1 group-hover:text-[#4fd8c4] transition-colors">
+            View project →
+          </span>
+        </div>
+      </a>
+      <div className="px-4 pb-4">
+        <ProjectEvidence project={project} />
       </div>
-    </a>
+    </div>
   );
 }
 
@@ -85,12 +120,18 @@ export default function Projects() {
       <p className="font-mono text-[11px] tracking-[0.2em] text-[#4fd8c4] mb-2">
         SEC.02 — PROJECTS
       </p>
-      <h2 className="font-display font-semibold text-xl mb-10">
-        Featured Projects
-      </h2>
+      <div className="text-center mb-10">
+        <h2 className="font-display font-semibold text-xl">
+          Featured Projects
+        </h2>
+        <p className="max-w-[540px] text-sm leading-relaxed text-[#8992a9] mt-3">
+          A closer look at the work where I turn complex workflows into useful,
+          human-centered products.
+        </p>
+      </div>
 
       {featured.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-[1000px] mb-6">
+          <div className="flex justify-center w-full max-w-[1000px] mb-6">
           {featured.map((project) => (
             <FeaturedCard key={project.name} project={project} />
           ))}

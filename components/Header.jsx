@@ -12,22 +12,32 @@ export default function Header() {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const sections = sectionLinks
-      .map((l) => document.getElementById(l.id))
-      .filter(Boolean);
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY + 150;
+      let currentSection = sectionLinks[0].id;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible.length > 0) setActiveSection(visible[0].target.id);
-      },
-      { threshold: [0.25, 0.4, 0.6, 0.75], rootMargin: "-120px 0px -35% 0px" },
-    );
+      sectionLinks.forEach((link) => {
+        const section = document.getElementById(link.id);
+        const sectionTop = section
+          ? section.getBoundingClientRect().top + window.scrollY
+          : Infinity;
 
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+        if (section && sectionTop <= scrollPosition) {
+          currentSection = link.id;
+        }
+      });
+
+      setActiveSection(currentSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, []);
 
   return (

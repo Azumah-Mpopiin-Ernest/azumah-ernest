@@ -67,7 +67,7 @@ export default function Home() {
               A little about me
             </h2>
             <p className="text-[#c4c9d6] leading-relaxed">
-              I'm a Telecommunication Engineering student at KNUST, Kumasi, and
+              I'm a Telecommunications Engineering student at KNUST, Kumasi, and
               a self-taught full-stack developer. Outside the code, I bring
               strong people skills and an ease in team settings that I've built
               deliberately, through reading, practice, and reflection. I lead
