@@ -8,7 +8,7 @@ service cloud.firestore {
     function isOwner() {
       return request.auth != null
         && request.auth.token.email_verified == true
-        && request.auth.token.email == 'REPLACE_WITH_YOUR_GOOGLE_EMAIL';
+        && request.auth.token.email == 'teslajunior0552@gmail.com';
     }
 
     function validProject(data) {
