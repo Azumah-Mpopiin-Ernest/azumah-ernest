@@ -294,6 +294,7 @@ export function normalizeProject(p = {}) {
     technologies: p.technologies || [],
     role: p.role || "",
     status: p.status || "",
+    lastUpdated: p.lastUpdated || "",
     link: p.link || "",
     repo: p.repo || "",
     cover: p.cover || "",

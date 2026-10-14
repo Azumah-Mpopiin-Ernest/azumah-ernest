@@ -11,6 +11,7 @@ import {
 } from "../components/Icons";
 import { useProfile, useProject } from "../lib/content";
 import { safeHref } from "../lib/url";
+import { formatDay } from "../lib/format";
 import NotFound from "./NotFound";
 
 function Gallery({ project }) {
@@ -164,7 +165,7 @@ export default function ProjectPage() {
               </div>
             </header>
 
-            <dl className="mt-12 grid gap-6 border-y border-line py-6 sm:grid-cols-3">
+            <dl className="mt-12 grid gap-6 border-y border-line py-6 sm:grid-cols-2 lg:grid-cols-4">
               {project.role && (
                 <div>
                   <dt className="text-sm text-faint">Role</dt>
@@ -175,6 +176,14 @@ export default function ProjectPage() {
                 <div>
                   <dt className="text-sm text-faint">Status</dt>
                   <dd className="mt-1 text-fg">{project.status}</dd>
+                </div>
+              )}
+              {formatDay(project.lastUpdated) && (
+                <div>
+                  <dt className="text-sm text-faint">Last updated</dt>
+                  <dd className="mt-1 text-fg">
+                    <time dateTime={project.lastUpdated}>{formatDay(project.lastUpdated)}</time>
+                  </dd>
                 </div>
               )}
               {project.technologies?.length > 0 && (

@@ -25,6 +25,7 @@ import {
 } from "./ui";
 import { BackIcon, ExternalIcon, TrashIcon, UpIcon, DownIcon } from "../components/Icons";
 import { normalizeProject } from "../lib/seed";
+import { todayISO } from "../lib/format";
 
 const slugify = (s) =>
   s
@@ -63,6 +64,7 @@ export default function ProjectEditor() {
     if (isNew) {
       const blank = normalizeProject({
         published: false,
+        lastUpdated: todayISO(),
         order: Date.now(),
         deviceFrame: "browser",
       });
@@ -251,6 +253,23 @@ export default function ProjectEditor() {
         <div className="grid gap-5 sm:grid-cols-2">
           <TextInput label="Your role" placeholder="Full-stack developer" value={form.role} onChange={set("role")} />
           <TextInput label="Status" placeholder="In production, Prototype…" value={form.status} onChange={set("status")} />
+          <div>
+            <TextInput
+              label="Last updated"
+              hint="Shown on your site. Leave empty to hide."
+              type="date"
+              max={todayISO()}
+              value={form.lastUpdated}
+              onChange={set("lastUpdated")}
+            />
+            <button
+              type="button"
+              onClick={() => set("lastUpdated")(todayISO())}
+              className="mt-1 min-h-11 text-sm text-signal hover:underline"
+            >
+              Set to today
+            </button>
+          </div>
           <TextInput
             label="Live link"
             type="url"

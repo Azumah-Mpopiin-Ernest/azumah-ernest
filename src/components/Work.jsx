@@ -3,6 +3,7 @@ import DeviceFrame from "./DeviceFrame";
 import { ChevronRight, ExternalIcon } from "./Icons";
 import { hasCaseStudy } from "../lib/seed";
 import { safeHref } from "../lib/url";
+import { formatDay } from "../lib/format";
 
 function TechList({ items }) {
   if (!items?.length) return null;
@@ -33,6 +34,16 @@ function StatusTag({ status }) {
   );
 }
 
+function Updated({ date }) {
+  const label = formatDay(date);
+  if (!label) return null;
+  return (
+    <span className="text-sm text-faint">
+      Updated <time dateTime={date}>{label}</time>
+    </span>
+  );
+}
+
 function FeaturedProject({ project }) {
   const caseStudy = hasCaseStudy(project);
   return (
@@ -43,6 +54,7 @@ function FeaturedProject({ project }) {
           {project.role && (
             <span className="text-sm text-faint">{project.role}</span>
           )}
+          <Updated date={project.lastUpdated} />
         </div>
         <h3 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
           {project.name}
@@ -115,6 +127,7 @@ function ProjectRow({ project }) {
             {project.name}
           </h3>
           <StatusTag status={project.status} />
+          <Updated date={project.lastUpdated} />
         </div>
         <p className="mt-1 line-clamp-2 text-sm text-dim sm:max-w-[70ch]">
           {project.summary}

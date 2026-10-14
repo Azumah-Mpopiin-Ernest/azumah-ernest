@@ -41,8 +41,9 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,html,svg,png,ico,woff2}"],
         globIgnores: ["images/**", "resume.pdf"],
         navigateFallback: "/index.html",
-        // Firebase Auth's redirect handler must never be served from cache.
-        navigateFallbackDenylist: [/^\/__\//],
+        // Firebase Auth's redirect handler and real files (e.g. /resume.pdf opened
+        // in a new tab) must reach the network, not the app shell.
+        navigateFallbackDenylist: [/^\/__\//, /\/[^/?]+\.[a-z0-9]+$/i],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith("/images/"),
