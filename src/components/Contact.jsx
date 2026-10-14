@@ -1,4 +1,5 @@
-import { DownloadIcon, ExternalIcon } from "./Icons";
+import { ExternalIcon } from "./Icons";
+import CvActions from "./CvActions";
 import { safeHref } from "../lib/url";
 
 export default function Contact({ profile }) {
@@ -12,16 +13,9 @@ export default function Contact({ profile }) {
           <p className="mt-6 max-w-[42ch] text-dim">
             Have a role, a project or a question? Reach me directly.
           </p>
-          {profile.resumeUrl && (
-            <a
-              href={safeHref(profile.resumeUrl)}
-              download
-              className="mt-8 inline-flex min-h-11 items-center gap-2 rounded-xl bg-action px-5 font-semibold text-on-action transition-colors hover:bg-action-hover"
-            >
-              <DownloadIcon />
-              Download CV
-            </a>
-          )}
+          <div className="mt-8">
+            <CvActions url={profile.resumeUrl} primary />
+          </div>
         </div>
 
         <ul className="self-end">

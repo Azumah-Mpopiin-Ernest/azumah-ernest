@@ -1,6 +1,5 @@
 import SignalTrace from "./SignalTrace";
-import { DownloadIcon } from "./Icons";
-import { safeHref } from "../lib/url";
+import CvActions from "./CvActions";
 
 export default function Hero({ profile }) {
   return (
@@ -38,16 +37,7 @@ export default function Hero({ profile }) {
             >
               See my work
             </a>
-            {profile.resumeUrl && (
-              <a
-                href={safeHref(profile.resumeUrl)}
-                download
-                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-line px-5 text-fg transition-colors hover:border-fg"
-              >
-                <DownloadIcon />
-                Download CV
-              </a>
-            )}
+            <CvActions url={profile.resumeUrl} />
           </div>
           {(profile.location || profile.availability) && (
             <p className="mt-6 flex items-center gap-2 text-sm text-faint">

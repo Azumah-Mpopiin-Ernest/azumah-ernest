@@ -165,10 +165,13 @@ export default function Work({ projects }) {
   const rest = projects?.filter((p) => !p.featured) ?? [];
 
   return (
-    <section id="work" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+    <section
+      id="work"
+      className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24"
+    >
       <div className="flex flex-wrap items-end justify-between gap-4">
         <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-          Selected work
+          Featured Projects
         </h2>
         {projects && (
           <p className="text-sm text-faint">
