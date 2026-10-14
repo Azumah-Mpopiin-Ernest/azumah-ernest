@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/* Signal Lab tokens */
+@theme {
+  --color-ink: #0e1a2b;
+  --color-panel: #132338;
+  --color-panel-2: #1a2d46;
+  --color-line: #253a57;
+  --color-fg: #eaf0f6;
+  --color-dim: #a3b3c6;
+  --color-faint: #71839a;
+  --color-signal: #5ce1e6;
+  --color-action: #f2a93b;
+  --color-action-hover: #f6bb62;
+  --color-on-action: #1d1404;
+  --color-danger: #ff7a6b;
+  --color-ok: #6ee7a8;
+
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-signal);
+    color: var(--color-ink);
+  }
+
+  button,
+  [role="button"],
+  a {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* Hero oscilloscope: one orchestrated moment on load */
+.trace-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: trace-draw 1.8s cubic-bezier(0.55, 0.1, 0.25, 1) 0.2s forwards;
+}
+
+.trace-ghost {
+  opacity: 0;
+  animation: fade-in 0.6s ease-out 1.6s forwards;
+}
+
+.hero-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes trace-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.live-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .trace-path,
+  .trace-ghost,
+  .hero-reveal,
+  .live-dot {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
