@@ -10,25 +10,35 @@ function rng(seed) {
   };
 }
 
-// Noise that resolves into a clean carrier: signal found in the noise.
-function buildPath(w, h) {
+// Where the receiver (portrait) sits inside the scope, derived from its size.
+function receiverBox(w, h) {
+  const size = Math.round(h * 0.86);
+  const right = Math.max(12, Math.round(w * 0.03));
+  return { size, right, left: w - right - size, top: Math.round((h - size) / 2) };
+}
+
+// Noise that resolves into a clean carrier, then settles into the receiver.
+function buildPath(w, h, endX) {
   const rand = rng(7);
   const mid = h / 2;
-  const cycles = Math.max(6, Math.round(w / 55));
+  const span = Math.max(1, endX);
+  const cycles = Math.max(4, Math.round(span / 55));
   const points = [];
-  for (let x = 0; x <= w; x += 3) {
-    const t = x / w;
+  for (let x = 0; x <= endX; x += 3) {
+    const t = x / span;
     const noiseAmp = Math.max(0, 1 - t / 0.45) ** 1.6 * h * 0.36;
     const noise = (rand() - 0.5) * 2 * noiseAmp;
-    const carrierAmp =
-      h * (0.06 + Math.min(1, Math.max(0, (t - 0.25) / 0.35)) * 0.15);
+    const swell = Math.min(1, Math.max(0, (t - 0.25) / 0.35));
+    const settle = Math.min(1, Math.max(0, (1 - t) / 0.12));
+    const carrierAmp = h * (0.06 + swell * 0.15) * settle;
     const carrier = Math.sin(t * Math.PI * 2 * cycles) * carrierAmp;
     points.push(`${x},${(mid + noise + carrier).toFixed(1)}`);
   }
+  points.push(`${endX},${mid}`);
   return `M${points.join(" L")}`;
 }
 
-export default function SignalTrace() {
+export default function SignalTrace({ children }) {
   const ref = useRef(null);
   const [size, setSize] = useState(null);
 
@@ -48,22 +58,26 @@ export default function SignalTrace() {
     return () => observer.disconnect();
   }, []);
 
-  const path = useMemo(() => size && buildPath(size.w, size.h), [size]);
+  const box = size && children ? receiverBox(size.w, size.h) : null;
+  const endX = size ? (box ? box.left + box.size * 0.08 : size.w) : 0;
+  const path = useMemo(() => size && buildPath(size.w, size.h, endX), [size, endX]);
 
   return (
     <div
       ref={ref}
-      aria-hidden="true"
-      className="relative h-28 overflow-hidden rounded-2xl border border-line bg-[#0b1626] sm:h-36 md:h-44"
+      className={`relative overflow-hidden rounded-2xl border border-line bg-[#0b1626] ${
+        children ? "h-40 sm:h-48 md:h-60" : "h-28 sm:h-36 md:h-44"
+      }`}
       style={{
         backgroundImage:
           "linear-gradient(to right, #1b2e46 1px, transparent 1px), linear-gradient(to bottom, #1b2e46 1px, transparent 1px)",
         backgroundSize: "10% 25%",
       }}
     >
-      <div className="absolute inset-x-0 top-1/2 h-px bg-[#2a4466]" />
+      <div aria-hidden="true" className="absolute inset-x-0 top-1/2 h-px bg-[#2a4466]" />
       {size && (
         <svg
+          aria-hidden="true"
           width={size.w}
           height={size.h}
           viewBox={`0 0 ${size.w} ${size.h}`}
@@ -91,6 +105,14 @@ export default function SignalTrace() {
             strokeLinecap="round"
           />
         </svg>
+      )}
+      {box && (
+        <div
+          className="absolute"
+          style={{ left: box.left, top: box.top, width: box.size, height: box.size }}
+        >
+          {children}
+        </div>
       )}
     </div>
   );

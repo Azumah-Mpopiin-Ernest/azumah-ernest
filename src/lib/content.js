@@ -11,8 +11,10 @@ import {
 } from "firebase/firestore/lite";
 import { app } from "./firebase";
 import {
+  normalizeAbout,
   normalizeProfile,
   normalizeProject,
+  seedAbout,
   seedProfile,
   seedProjects,
 } from "./seed";
@@ -60,6 +62,12 @@ async function loadProfile() {
   return snap.exists() ? normalizeProfile(snap.data()) : seedProfile;
 }
 
+async function loadAbout() {
+  if (!db) return seedAbout;
+  const snap = await getDoc(doc(db, "site", "about"));
+  return snap.exists() ? normalizeAbout(snap.data()) : seedAbout;
+}
+
 function useLoader(loader, fallback, key) {
   const [state, setState] = useState({ data: null, loading: true, key });
 
@@ -98,4 +106,8 @@ export function useProject(slug) {
 
 export function useProfile() {
   return useLoader(loadProfile, () => seedProfile, "profile");
+}
+
+export function useAbout() {
+  return useLoader(loadAbout, () => seedAbout, "about");
 }

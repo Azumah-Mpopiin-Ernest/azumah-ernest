@@ -53,7 +53,8 @@ export default defineConfig({
           {
             urlPattern: ({ url }) =>
               url.hostname === "firebasestorage.googleapis.com" &&
-              url.searchParams.get("alt") === "media",
+              url.searchParams.get("alt") === "media" &&
+              !url.pathname.includes("%2Fvideos%2F"),
             handler: "CacheFirst",
             options: {
               cacheName: "uploads",

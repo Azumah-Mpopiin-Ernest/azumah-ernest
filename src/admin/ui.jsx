@@ -239,7 +239,7 @@ export function RowList({ items, onChange, renderRow, makeNew, addLabel, empty }
   );
 }
 
-export function FilePicker({ label, accept, multiple, busy, onFiles }) {
+export function FilePicker({ label, accept, multiple, busy, disabled, onFiles }) {
   const inputRef = useRef(null);
   return (
     <>
@@ -256,7 +256,7 @@ export function FilePicker({ label, accept, multiple, busy, onFiles }) {
           if (files.length) onFiles(files);
         }}
       />
-      <Button variant="secondary" disabled={busy} onClick={() => inputRef.current.click()}>
+      <Button variant="secondary" disabled={busy || disabled} onClick={() => inputRef.current.click()}>
         <ImageIcon />
         {busy ? "Uploading…" : label}
       </Button>

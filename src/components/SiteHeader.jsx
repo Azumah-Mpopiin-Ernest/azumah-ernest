@@ -4,7 +4,7 @@ import { safeHref } from "../lib/url";
 
 const links = [
   { label: "Work", href: "/#work" },
-  { label: "About", href: "/#about" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/#contact" },
 ];
 

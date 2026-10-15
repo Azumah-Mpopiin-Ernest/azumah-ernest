@@ -59,9 +59,9 @@ export const seedProfile = {
     {
       group: "Firebase",
       items: [
-        { name: "Auth", note: "Built into Phix" },
-        { name: "Firestore", note: "Built into Phix" },
-        { name: "Cloud Functions", note: "Built into Phix" },
+        { name: "Auth", note: "Phix, Telemedicine and Clinical Protocols" },
+        { name: "Firestore", note: "Phix, Telemedicine and Clinical Protocols" },
+        { name: "Cloud Functions", note: "Phix, Telemedicine and Clinical Protocols" },
       ],
     },
   ],
@@ -326,4 +326,25 @@ export function hasCaseStudy(p) {
       p.featureGroups?.length ||
       p.screenshots?.length > 1,
   );
+}
+
+// The /about page. Sections hold text plus photos, uploaded videos or YouTube/Vimeo links.
+export const seedAbout = {
+  story: "",
+  sections: [],
+};
+
+export function normalizeAbout(a = {}) {
+  return {
+    story: a.story || "",
+    sections: (a.sections || []).map((s) => ({
+      title: s.title || "",
+      body: s.body || "",
+      media: (s.media || []).map((m) => ({
+        kind: m.kind || "image",
+        url: m.url || "",
+        caption: m.caption || "",
+      })),
+    })),
+  };
 }

@@ -7,14 +7,16 @@ import Overview from "./Overview";
 import ProjectsList from "./ProjectsList";
 import ProjectEditor from "./ProjectEditor";
 import ProfileEditor from "./ProfileEditor";
+import AboutEditor from "./AboutEditor";
 import Notes from "./Notes";
-import { GridIcon, HomeIcon, NoteIcon, UserIcon } from "../components/Icons";
+import { GridIcon, HomeIcon, ImageIcon, NoteIcon, UserIcon } from "../components/Icons";
 import NotFound from "../pages/NotFound";
 
 const nav = [
   { to: "/admin", label: "Overview", icon: HomeIcon, end: true },
   { to: "/admin/projects", label: "Projects", icon: GridIcon },
   { to: "/admin/profile", label: "Profile", icon: UserIcon },
+  { to: "/admin/about", label: "About", icon: ImageIcon },
   { to: "/admin/notes", label: "Notes", icon: NoteIcon },
 ];
 
@@ -67,7 +69,7 @@ function Shell({ children }) {
 
       <nav
         aria-label="Dashboard"
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-line bg-ink/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-line bg-ink/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
         {nav.map(({ to, label, icon, end }) => (
           <NavLink
@@ -115,6 +117,7 @@ function Gate() {
         <Route path="projects/new" element={<ProjectEditor />} />
         <Route path="projects/:id" element={<ProjectEditor />} />
         <Route path="profile" element={<ProfileEditor />} />
+        <Route path="about" element={<AboutEditor />} />
         <Route path="notes" element={<Notes />} />
         <Route path="notes/:id" element={<Notes />} />
         <Route path="*" element={<NotFound />} />

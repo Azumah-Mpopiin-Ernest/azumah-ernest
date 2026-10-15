@@ -6,7 +6,6 @@ import Work from "../components/Work";
 import About from "../components/About";
 import Contact from "../components/Contact";
 import SiteFooter from "../components/SiteFooter";
-import SignalTrace from "../components/SignalTrace";
 import { useProfile, useProjects } from "../lib/content";
 
 export default function Home() {
@@ -30,13 +29,7 @@ export default function Home() {
       </a>
       <SiteHeader profile={profile} />
       <main>
-        {profile ? (
-          <Hero profile={profile} />
-        ) : (
-          <div className="mx-auto max-w-6xl px-4 pt-24 pb-16 sm:px-6 sm:pt-32">
-            <SignalTrace />
-          </div>
-        )}
+        <Hero profile={profile} />
         <Work projects={projects} />
         {profile && (
           <>

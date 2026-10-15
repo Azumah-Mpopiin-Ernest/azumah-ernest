@@ -22,10 +22,12 @@ import {
   getStorage,
   ref,
   uploadBytes,
+  uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../lib/firebase";
 import { byOrder } from "../lib/content";
 import {
+  normalizeAbout,
   normalizeProfile,
   normalizeProject,
   seedProfile,
@@ -118,6 +120,20 @@ export async function getProfile() {
 export async function saveProfile(profile) {
   await setDoc(doc(db, "site", "profile"), {
     ...profile,
+    updatedAt: serverTimestamp(),
+  });
+}
+
+/* About page */
+
+export async function getAbout() {
+  const snap = await getDoc(doc(db, "site", "about"));
+  return snap.exists() ? normalizeAbout(snap.data()) : null;
+}
+
+export async function saveAbout(about) {
+  await setDoc(doc(db, "site", "about"), {
+    ...normalizeAbout(about),
     updatedAt: serverTimestamp(),
   });
 }
@@ -227,6 +243,31 @@ export async function uploadPdf(file, folder) {
   const fileRef = ref(storage, `public/${folder}/${uniqueName("pdf")}`);
   await uploadBytes(fileRef, file, { contentType: "application/pdf" });
   return getDownloadURL(fileRef);
+}
+
+export const MAX_VIDEO_MB = 100;
+
+export function uploadVideo(file, folder, onProgress) {
+  if (!file.type.startsWith("video/")) throw new Error("Choose a video file.");
+  if (file.size > MAX_VIDEO_MB * 1024 * 1024) {
+    throw new Error(
+      `Videos must be under ${MAX_VIDEO_MB} MB. For longer videos, upload to YouTube and add the link instead.`,
+    );
+  }
+  const ext = (file.name.split(".").pop() || "mp4").toLowerCase().replace(/[^a-z0-9]/g, "");
+  const fileRef = ref(storage, `public/${folder}/videos/${uniqueName(ext)}`);
+  const task = uploadBytesResumable(fileRef, file, {
+    contentType: file.type,
+    cacheControl: "public, max-age=31536000, immutable",
+  });
+  return new Promise((resolve, reject) => {
+    task.on(
+      "state_changed",
+      (snap) => onProgress?.(snap.bytesTransferred / snap.totalBytes),
+      reject,
+      () => getDownloadURL(fileRef).then(resolve, reject),
+    );
+  });
 }
 
 // Best effort: only files we uploaded to Storage are removed; bundled /images stay.
