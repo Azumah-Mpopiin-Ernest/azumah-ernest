@@ -156,7 +156,12 @@ export default function ProjectEditor() {
         toast("Fix the highlighted fields first.", "error");
         return;
       }
-      const data = { ...current, name: current.name.trim() };
+      // An empty date would hide it on the site; saving counts as an update.
+      const data = {
+        ...current,
+        name: current.name.trim(),
+        lastUpdated: current.lastUpdated || todayISO(),
+      };
       const savedId = await saveProject(id, data);
       const kept = new Set([data.cover, ...data.screenshots]);
       const removed = [original.cover, ...original.screenshots].filter(
@@ -256,7 +261,7 @@ export default function ProjectEditor() {
           <div>
             <TextInput
               label="Last updated"
-              hint="Shown on your site. Leave empty to hide."
+              hint="Shown on your site. Filled with today's date if left empty when you save."
               type="date"
               max={todayISO()}
               value={form.lastUpdated}

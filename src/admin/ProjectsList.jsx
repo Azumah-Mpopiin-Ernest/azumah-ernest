@@ -7,6 +7,7 @@ import {
   subscribeProjects,
 } from "./data";
 import { Button, IconButton, describeError, move, useToast } from "./ui";
+import { formatDay } from "../lib/format";
 import {
   DownIcon,
   PlusIcon,
@@ -83,6 +84,9 @@ export default function ProjectsList() {
                     {p.published ? "Published" : "Draft"}
                   </span>
                   {p.featured && <span className="text-signal">Featured</span>}
+                  <span className={p.lastUpdated ? "text-faint" : "text-danger"}>
+                    {p.lastUpdated ? `Updated ${formatDay(p.lastUpdated)}` : "No date"}
+                  </span>
                 </p>
               </Link>
               <div className="flex shrink-0 items-center">
