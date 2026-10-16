@@ -11,10 +11,10 @@ export default function About({ profile }) {
             About me
           </h2>
           <Link
-            to="/about"
+            to="/story"
             className="mt-6 inline-flex min-h-11 items-center gap-1 rounded-xl border border-line px-5 text-fg transition-colors hover:border-signal hover:text-signal"
           >
-            More about me
+            Read my story
             <ChevronRight />
           </Link>
         </div>

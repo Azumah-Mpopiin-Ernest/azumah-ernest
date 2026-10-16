@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { NavLink, Route, Routes } from "react-router";
+import { Navigate, NavLink, Route, Routes } from "react-router";
 import { AuthProvider, useAuth } from "./auth";
 import { ToastProvider } from "./ui";
 import Login from "./Login";
@@ -16,7 +16,7 @@ const nav = [
   { to: "/admin", label: "Overview", icon: HomeIcon, end: true },
   { to: "/admin/projects", label: "Projects", icon: GridIcon },
   { to: "/admin/profile", label: "Profile", icon: UserIcon },
-  { to: "/admin/about", label: "About", icon: ImageIcon },
+  { to: "/admin/story", label: "Story", icon: ImageIcon },
   { to: "/admin/notes", label: "Notes", icon: NoteIcon },
 ];
 
@@ -117,7 +117,8 @@ function Gate() {
         <Route path="projects/new" element={<ProjectEditor />} />
         <Route path="projects/:id" element={<ProjectEditor />} />
         <Route path="profile" element={<ProfileEditor />} />
-        <Route path="about" element={<AboutEditor />} />
+        <Route path="story" element={<AboutEditor />} />
+        <Route path="about" element={<Navigate to="/admin/story" replace />} />
         <Route path="notes" element={<Notes />} />
         <Route path="notes/:id" element={<Notes />} />
         <Route path="*" element={<NotFound />} />

@@ -226,7 +226,7 @@ export default function AboutEditor() {
       await Promise.all(mediaUrls(original).filter((u) => !kept.has(u)).map(deleteStoredFile));
       setOriginal(data);
       setForm(data);
-      toast("About page saved.");
+      toast("Story page saved.");
     } catch (e) {
       toast(describeError(e), "error");
     } finally {
@@ -240,11 +240,11 @@ export default function AboutEditor() {
     <div className="space-y-6">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="font-display text-3xl font-bold">About page</h1>
-          <p className="mt-1 text-dim">Your story, presentations, hobbies and life. Shown at /about.</p>
+          <h1 className="font-display text-3xl font-bold">My story</h1>
+          <p className="mt-1 text-dim">Your story, presentations, hobbies and life. Shown at /story.</p>
         </div>
         <a
-          href="/about"
+          href="/story"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex min-h-11 items-center gap-1 text-sm text-signal hover:underline"
@@ -331,7 +331,7 @@ export default function AboutEditor() {
           {dirty ? "Unsaved changes" : "All changes saved"}
         </p>
         <Button onClick={save} disabled={saving || !dirty || busy.section !== null}>
-          {saving ? "Saving…" : "Save about page"}
+          {saving ? "Saving…" : "Save story page"}
         </Button>
       </div>
     </div>

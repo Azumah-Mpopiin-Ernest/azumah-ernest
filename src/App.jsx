@@ -17,7 +17,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutPage />} />
+        <Route path="/story" element={<AboutPage />} />
+        <Route path="/about" element={<Navigate to="/story" replace />} />
         <Route path="/work/:slug" element={<ProjectPage />} />
         <Route path="/projects/:slug" element={<LegacyProjectRedirect />} />
         <Route

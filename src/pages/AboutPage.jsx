@@ -24,7 +24,7 @@ export default function AboutPage() {
   }, []);
 
   useEffect(() => {
-    if (profile) document.title = `About · ${profile.name}`;
+    if (profile) document.title = `My story · ${profile.name}`;
   }, [profile]);
 
   const ready = profile && about;
@@ -84,7 +84,7 @@ export default function AboutPage() {
 
               <div className="min-w-0">
                 <h1 className="font-display text-[clamp(2.6rem,7vw,4.5rem)] leading-[0.95] font-extrabold tracking-[-0.03em]">
-                  About me
+                  My story
                 </h1>
                 <p className="mt-8 max-w-[60ch] text-xl leading-relaxed text-fg">{profile.about}</p>
                 {paragraphs(about.story).map((p, i) => (
